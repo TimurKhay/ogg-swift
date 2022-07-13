@@ -20,7 +20,7 @@ let package = Package(
         .binaryTarget(
             name: "YbridOgg", 
             url: "https://github.com/ybrid/ogg-swift/releases/download/"+version+"/YbridOgg.xcframework.zip",
-            checksum: "871547dc18a2c7257dc9711203afa523117c845cc73fc49b0e1fc7d32667f543"
+            checksum: "172bc6e449e8d5dc85f8eaf2c57a70b0d399c6e2f98430c6b4ae849733bc596b"
             )
     ]
 )
