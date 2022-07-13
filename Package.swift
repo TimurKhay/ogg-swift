@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-let version = "0.8.1"
+let version = "0.8.2"
 let package = Package(
     name: "YbridOgg",
     platforms: [
