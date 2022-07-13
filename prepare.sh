@@ -22,10 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# 
+#
 # prepares XCode project with sources from Xiph.org.
-# 
-# Preconditions: 
+#
+# Preconditions:
 # - XCode installed
 
 
@@ -37,27 +37,27 @@ rm -rf libogg* > $logfile
 
 wget $liboggDownload >> $logfile
 unzip `basename $liboggDownload` >> $logfile
-
-liboggDir=`basename $liboggDownload | sed "s/\.zip$//"` 
+rm -r include
+mkdir include
+rm -r src
+mkdir src
+liboggDir=`basename $liboggDownload | sed "s/\.zip$//"`
 cd $liboggDir
 ./configure >> $logfile
 
 cd $here
 echo "copy sources into ogg-swift.xcodeproj"
-# pattern to flatten all ogg includes 
+# pattern to flatten all ogg includes
 modifyIncludesPattern='s|<ogg\/(.+)>|"\1"|g'
-modifiedMarkerPattern='1s|^|// this file has been modified by nacamar GmbH\n|'
 for f in $liboggDir/include/ogg/*.h; do
     file=`basename $f`
     echo "copying $file with flattened ogg includes"
-    sed -r $modifyIncludesPattern $f > include/$file
-    sed -i '' "$modifiedMarkerPattern" include/$file 
+    sed -E $modifyIncludesPattern $f > include/$file
 done
 for f in $liboggDir/src/*.{h,c}; do
     file=`basename $f`
     echo "copying $file with flattened ogg includes"
-    sed -r $modifyIncludesPattern $f > src/$file
-    sed -i '' "$modifiedMarkerPattern" src/$file 
+    sed -E $modifyIncludesPattern $f > src/$file
 done
 cp $liboggDir/COPYING include
 echo "ogg-swift.xcodeproj is ready, check $logfile"
