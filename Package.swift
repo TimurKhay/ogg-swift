@@ -6,9 +6,9 @@ import PackageDescription
 let version = "0.8.3"
 let package = Package(
     name: "YbridOgg",
-    platforms: [
-        .macOS(.v10_10), .iOS(.v9)
-    ],
+    // platforms: [
+    //     .macOS(.v10_10), .iOS(.v9)
+    // ],
     products: [
         .library(
             name: "YbridOgg",
